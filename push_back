@@ -1,0 +1,27 @@
+void push_back(int value){
+    Node* newNode = new Node;
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if(head == NULL){
+        head = tail = newNode;
+    }else{
+    tail->next = newNode;
+    tail = newNode;
+}
+}
+
+
+//Another option
+void push_back(int value){
+  Node* newNode = new Node;
+  newNode->data = value;
+  newNode->next = NULL;
+
+if(head==NUL){
+  head=tail=NULL;
+  return ;
+}
+tail->next = newNode;
+    tail = newNode;
+}
