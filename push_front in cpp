@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node{
+    int data;
+    Node* next;
+};
+
+//Global head tail declaration
+
+Node* head = NULL;
+Node* tail = NULL;
+
+
+void push_front(int value){
+    Node* newNode = new Node;
+    newNode->data = value;
+    newNode-> = head;
+    head = newNode;
+
+    if(tail == NULL){
+        tail == newNode;
+    }
+}
+
+void printlist(){
+    Node* temp = head;
+    while(temp != NULL){
+        cout<<temp->data<<"->";
+        temp = temp->next;
+    }
+    cout<<endl;
+}
+
+int main(){
+    push_front(10);
+    push_front(30);
+    push_front(40);
+
+    printlist();
+
+    return 0;
+}
