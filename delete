@@ -1,0 +1,95 @@
+Pseudocode for deleting operation 
+
+
+void delete_front(){
+    if(head == NULL){
+        cout << "List is empty! Cannot delete.\n";
+        return;
+    }
+
+    Node* temp = head;
+    head = head->next;
+    delete temp;
+
+    if(head == NULL){   // list became empty
+        tail = NULL;
+    }
+}
+
+
+void delete_end(){
+    if(head == NULL){
+        cout << "List is empty! Cannot delete.\n";
+        return;
+    }
+
+    // Only 1 node
+    if(head == tail){
+        delete head;
+        head = tail = NULL;
+        return;
+    }
+
+    Node* temp = head;
+
+    // Go to the second last node
+    while(temp->next != tail){
+        temp = temp->next;
+    }
+
+    delete tail;
+    tail = temp;
+    tail->next = NULL;
+}
+
+
+
+void delete_at_position(int pos){
+    if(pos < 1){
+        cout << "Invalid Position!" << endl;
+        return;
+    }
+
+    if(head == NULL){
+        cout << "List is empty!" << endl;
+        return;
+    }
+
+    // Case 1: Delete head
+    if(pos == 1){
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+
+        if(head == NULL)    // list becomes empty
+            tail = NULL;
+
+        return;
+    }
+
+    // Traverse to node before target
+    Node* temp = head;
+    int cur_pos = 1;
+
+    while(temp != NULL && cur_pos < pos - 1){
+        temp = temp->next;
+        cur_pos++;
+    }
+
+    if(temp == NULL || temp->next == NULL){
+        cout << "Position out of range!" << endl;
+        return;
+    }
+
+    Node* delNode = temp->next;
+    temp->next = delNode->next;
+
+    // If deleting last node → update tail
+    if(delNode == tail){
+        tail = temp;
+    }
+
+    delete delNode;
+}
+
+
