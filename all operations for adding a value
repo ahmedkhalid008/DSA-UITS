@@ -1,0 +1,109 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+struct Node{
+    int data;
+    Node* next;
+};
+
+//Global head tail declaration
+
+Node* head = NULL;
+Node* tail = NULL;
+
+
+//Code for insert at the begining 
+
+void push_front(int value){
+    Node* newNode = new Node;
+    newNode->data = value;
+    newNode->next = head;
+    head = newNode;
+
+    if(tail == NULL){
+        tail = newNode;
+    }
+}
+
+
+//Code for insert at the end
+
+void push_back(int value){
+    Node* newNode = new Node;
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if(head == NULL){
+        head = tail = newNode;
+    }else{
+    tail->next = newNode;
+    tail = newNode;
+}
+}
+
+
+//Code for insert at any position
+
+void insert_at_position(int pos, int value){
+    if(pos<1){
+        cout<<"Invalid Position."<<endl;
+        return ;
+    }
+    Node* newNode = new Node;
+    newNode->data = value;
+    newNode->next = NULL;
+
+
+    if(pos == 1){
+        newNode->next = head;
+        head = newNode;
+
+
+    if(tail == NULL)
+        tail = newNode;
+        return ;
+    }
+    Node* temp = head;
+    int cur_pos = 1;
+
+    while(temp!=NULL && cur_pos < pos-1){
+        temp = temp -> next;
+        cur_pos++;
+    }
+    if(temp==NULL){
+        cout<<"Position Out Of Range."<<endl;
+        return ;
+    }
+
+    newNode->next = temp->next;
+    temp->next=newNode;
+
+    if(newNode->next ==NULL){
+        tail = newNode;
+    }
+}
+
+
+//printlist function 
+
+void printlist(){
+    Node* temp = head;
+    while(temp != NULL){
+        cout<<temp->data<<"->";
+        temp = temp->next;
+    }
+    cout<<"NULL";
+}
+
+int main(){
+    push_front(10);
+    push_front(30);
+    push_front(40);
+    push_front(4);
+    push_back(69);
+    insert_at_position(1,55);
+
+    printlist();
+
+    return 0;
+}
